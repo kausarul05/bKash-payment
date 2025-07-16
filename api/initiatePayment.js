@@ -30,9 +30,16 @@ const getToken = async () => {
 }
 
 const initiatePayment = async (req, res) => {
+  res.send("Initiating payment before try...")
   try {
-    if (!id_token) await getToken()
-    const { amount } = req.body
+    res.send("Initiating payment...")
+    if (!id_token) await getToken();
+
+    res.send("Token retrieved successfully...", id_token);
+
+    const { amount } = req.body;
+
+    res.send("amount: " + amount);
 
     const response = await axios.post(
       `${BKASH_BASE_URL}/tokenized/checkout/create`,
